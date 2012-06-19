@@ -38,36 +38,55 @@
 					self.on(settings.hideEvent, hideTooltip);
 				}
 
-				tooltip = self.find('.' + settings.tooltipClass);
+				html = '<div class="' + settings.tooltipClass + '">';
 
-				if (tooltip.length === 0) {
-
-					html = '<div class="' + settings.tooltipClass + '">';
-
-					if (settings.closeClass) {
-						html += '<a class="' + settings.closeClass + '">x</a>';
-					}
-
-					if (settings.contentAttributes.heading) {
-						html += '<h6>' + self.attr(settings.contentAttributes.heading) + '</h6>';
-					}
-
-					html += '<p>' + self.attr(settings.contentAttributes.text) + '</p>';
-					html += '</div>';
-
-					tooltip = self.append(html);
+				if (settings.closeClass) {
+					html += '<a class="' + settings.closeClass + '">x</a>';
 				}
 
-				tooltip.show();
+				if (settings.contentAttributes.heading) {
+					html += '<h6>' + getAttributeValue(settings.contentAttributes.heading) + '</h6>';
+				}
+
+				html += '<p>' + getAttributeValue(settings.contentAttributes.text) + '</p>';
+				html += '</div>';
+
+				tooltip = self.append(html).show();
 			}
 
 			/**
-			* Hide the tooltip
+			* Get the attribute value and store the original
+			* title attribute in a in a data attribute
+			*
+			* @method getAttributeValue
+			*/
+			function getAttributeValue(attr) {
+
+				if (attr !== 'title') {
+					return self.attr(settings.contentAttributes.heading);
+				}
+
+				var val = self.attr("title");
+				self.removeAttr("title");
+				self.data("original-title", val);
+
+				return val;
+			}
+
+			/**
+			* Hide the tooltip and restore the title attribute
 			*
 			* @method hideTooltip
 			*/
 			function hideTooltip() {
-				self.find('.' + settings.tooltipClass).hide();
+
+				var title = self.data("original-title");
+
+				if (title.length > 0) {
+					self.attr("title", title);
+				}
+
+				self.find('.' + settings.tooltipClass).remove();
 			}
 
 			self.on(settings.showEvent, showTooltip);
