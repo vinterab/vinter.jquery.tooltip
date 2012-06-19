@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jquery.vinter.tooltip</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="../src/jquery.vinter.tooltip.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('abbr').tooltip();
+		});
+	</script>
+
+	<style type="text/css">
+	abbr {
+		position: relative;
+		display: inline-block;
+	}
+
+	.ttip {
+		position: absolute;
+		bottom: 20px;
+		left: 0px;
+		background: #fffeda;
+		padding: 8px 6px;
+		border-radius: 10px;
+		box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.6);
+		z-index: 100;
+	}
+
+	.ttip p {
+		margin: 0;
+	}
+
+	</style>
+</head>
+<body>
+	<h1>vinter.jquery.tooltip</h1>
+	<abbr title="Testing">This is a tooltip</abbr>
+</body>
+</html>
