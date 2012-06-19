@@ -23,7 +23,7 @@
 			var self = $(this);
 
 			/**
-			* Set the selected item text value to the search input.
+			* Show the tooltip
 			*
 			* @method showTooltip
 			*/
@@ -62,19 +62,15 @@
 			}
 
 			/**
-			* Set the selected item text value to the search input.
+			* Hide the tooltip
 			*
 			* @method hideTooltip
-			* @param {Object} item The selected item.
 			*/
 			function hideTooltip() {
-
 				self.find('.' + settings.tooltipClass).hide();
-				
 			}
 
 			self.on(settings.showEvent, showTooltip);
-
 		});
 	};
 
