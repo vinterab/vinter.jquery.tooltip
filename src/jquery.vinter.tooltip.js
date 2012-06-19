@@ -4,6 +4,7 @@
 		var defaults = {
 			tooltipClass: 'ttip',
 			closeClass: undef,
+			center: true,
 			contentAttributes: {
 				heading: undef,
 				text: 'title'
@@ -47,7 +48,13 @@
 				html += '<p>' + getAttributeValue(settings.contentAttributes.text) + '</p>';
 				html += '</div>';
 
-				tooltip = self.append(html).show();
+				tooltip = $(html);
+
+				self.append(tooltip);
+
+				if (settings.center) {
+					tooltip.css('left', ( tooltip.outerWidth() - self.outerWidth() ) / -2 + 'px');
+				}
 			}
 
 			/**
